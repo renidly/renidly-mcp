@@ -1,0 +1,53 @@
+{
+  "name": "renidly-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for the Renidly B2B professional data APIs (people, companies, emails, phones). Run with npx.",
+  "type": "module",
+  "bin": {
+    "renidly-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "renidly": "^0.5.0",
+    "zod": "^4.6.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "tsup": "^8",
+    "typescript": "^5",
+    "vitest": "^3"
+  },
+  "author": "Renidly",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "renidly",
+    "mcp",
+    "model-context-protocol",
+    "b2b",
+    "enrichment",
+    "email verification"
+  ],
+  "homepage": "https://github.com/renidly/renidly-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/renidly/renidly-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/renidly/renidly-mcp/issues"
+  }
+}

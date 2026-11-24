@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: release   # must match the "Environment name" in npm Trusted Publishing
+    permissions:
+      contents: read
+      id-token: write   # npm Trusted Publishing (OIDC) + provenance — no token needed
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      # Trusted Publishing needs a recent npm CLI (>= 11.5.1).
+      - run: npm install -g npm@latest
+      - name: Publish (skip if this version is already on the registry)
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view "renidly-mcp@$VERSION" version >/dev/null 2>&1; then
+            echo "renidly-mcp@$VERSION already published — nothing to do."
+          else
+            npm publish --provenance --access public
+          fi

@@ -4,7 +4,7 @@
   "description": "MCP server for the Renidly B2B professional data APIs (people, companies, emails, phones). Run with npx.",
   "type": "module",
   "bin": {
-    "renidly-mcp": "./dist/index.js"
+    "renidly-mcp": "dist/index.js"
   },
   "files": [
     "dist"
